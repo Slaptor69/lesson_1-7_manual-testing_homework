@@ -128,7 +128,7 @@ form.addEventListener('submit', async event => {
   } finally {
     if (currentRevision === revision) {
       isSubmitting = false;
-      submitButton.disabled = false;
+      submitButton.disabled = isRestricted();
       form.setAttribute('aria-busy', 'false');
     }
   }
@@ -165,12 +165,12 @@ document.querySelector('#reset-lab').addEventListener('click', async () => {
   revision += 1;
   isSubmitting = false;
   submitButton.disabled = false;
-  resetSecurity();
   resetData();
   selectedId = null;
   filter.value = 'all';
   form.reset();
   form.setAttribute('aria-busy', 'false');
+  resetSecurity();
   document.querySelector('#service-mode').value = 'normal';
   document.querySelector('#lab-status').textContent = getStorageProblem() || 'Исходные данные восстановлены.';
   setFormStatus('Заявка останется в этом браузере.');
